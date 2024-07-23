@@ -24,11 +24,11 @@ const mensajePersonalizado = (sequelize, type) => {
         },
         updateMensaje: {
             type: type.STRING,
-            comment: 'actuazlizar estacion'
+            comment: 'actualizar estacion'
         },
     }, {
         timestamps: false,
-        comment: 'Tabla de usuarios'
+        comment: 'Tabla de Mensaje Personalizado'
     })
 }
 

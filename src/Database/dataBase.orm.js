@@ -50,6 +50,8 @@ const usuarioModel = require('../models/usuario.model');
 const estacionModel = require('../models/estacion.model')
 const estacion_usuarioModel = require('../models/estacion_usuario.model');
 const mensajePersonalizadoModel = require("../models/mensajePersonalizado.model");
+const puntoInteresModel = require("../models/puntoInteres.model");
+const beaconModel = require("../models/beacon.model");
 
 
 
@@ -62,6 +64,8 @@ const usuario = usuarioModel(sequelize, Sequelize)
 const estacion = estacionModel(sequelize, Sequelize)
 const estacion_usuario = estacion_usuarioModel(sequelize, Sequelize)    
 const mensajePersonalizado = mensajePersonalizadoModel(sequelize, Sequelize) 
+const puntoInteres = puntoInteresModel(sequelize, Sequelize)
+const beacon = beaconModel(sequelize, Sequelize)
 
 
 
@@ -77,6 +81,16 @@ usuario.belongsToMany(estacion, { through: estacion_usuario, foreignKey: 'usuari
 // Relacion de umo a mucho Usuario - Mensaje Personalizado
 usuario.hasMany(mensajePersonalizado, { foreignKey: 'usuarioId' });
 mensajePersonalizado.belongsTo(usuario, { foreignKey: 'usuarioId' });
+
+// Relación entre uno a muchos Estación - Punto de Interes
+
+estacion.hasMany(puntoInteres, {foreignKey: 'estacionId'} );
+puntoInteres.belongsTo(estacion, {foreignKey: 'estacionId'} );
+
+// Relación entre uno a muchos Estación - Beacon
+estacion.hasMany(beacon, {foreignKey: 'estacionId'} );
+beacon.belongsTo(estacion, {foreignKey: 'estacionId'} );
+
 
 
 

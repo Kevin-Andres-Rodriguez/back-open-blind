@@ -28,11 +28,11 @@ const estacion = (sequelize, type) => {
         },
         updateEstacion: {
             type: type.STRING,
-            comment: 'actuazlizar estacion'
+            comment: 'actualizar estacion'
         },
     }, {
         timestamps: false,
-        comment: 'Tabla de usuarios'
+        comment: 'Tabla de estacion'
     })
 }
 

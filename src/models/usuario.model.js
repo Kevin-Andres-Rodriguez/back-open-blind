@@ -44,7 +44,7 @@ const usuario = (sequelize, type) => {
         },
         updateUser: {
             type: type.STRING,
-            comment: 'actuazlizar de usuario'
+            comment: 'actualizar de usuario'
         },
     }, {
         timestamps: false,
