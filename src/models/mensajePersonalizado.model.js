@@ -1,0 +1,35 @@
+const mensajePersonalizado = (sequelize, type) => {
+    return sequelize.define('mensajePersonalizado', {
+        mensajeId : {
+            type: type.INTEGER,
+            autoIncrement: true,
+            primaryKey: true,
+            comment: 'Campo unico de mensaje Personzalido'
+        },
+        mensaje: {
+            type: type.TEXT,
+            comment: 'meensaje en caso de emergencia'
+        },
+        contactoMensaje: {
+            type: type.STRING,
+            comment: 'Descripcion de la estacion'
+        },
+        estadoMensaje: {
+            type: type.STRING,
+            comment: 'estado de usuario'
+        },
+        createMensaje: {
+            type: type.STRING,
+            comment: 'crear estacion'
+        },
+        updateMensaje: {
+            type: type.STRING,
+            comment: 'actuazlizar estacion'
+        },
+    }, {
+        timestamps: false,
+        comment: 'Tabla de usuarios'
+    })
+}
+
+module.exports = mensajePersonalizado
