@@ -122,6 +122,7 @@ sequelize.sync({ alter: true }) // alter will update the database schema to matc
 
 // Exportar el objeto sequelize
 module.exports = {
+    sequelize,
     usuario,
     estacion,
     mensajePersonalizado,
