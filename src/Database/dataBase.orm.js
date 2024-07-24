@@ -52,6 +52,8 @@ const estacion_usuarioModel = require('../models/estacion_usuario.model');
 const mensajePersonalizadoModel = require("../models/mensajePersonalizado.model");
 const puntoInteresModel = require("../models/puntoInteres.model");
 const beaconModel = require("../models/beacon.model");
+const rutaModel = require("../models/ruta.model");
+const guiaVozModel = require("../models/guiaVoz.model");
 
 
 
@@ -66,6 +68,8 @@ const estacion_usuario = estacion_usuarioModel(sequelize, Sequelize)
 const mensajePersonalizado = mensajePersonalizadoModel(sequelize, Sequelize) 
 const puntoInteres = puntoInteresModel(sequelize, Sequelize)
 const beacon = beaconModel(sequelize, Sequelize)
+const ruta = rutaModel(sequelize, Sequelize)
+const guiaVoz = guiaVozModel(sequelize, Sequelize)
 
 
 
@@ -91,6 +95,14 @@ puntoInteres.belongsTo(estacion, {foreignKey: 'estacionId'} );
 estacion.hasMany(beacon, {foreignKey: 'estacionId'} );
 beacon.belongsTo(estacion, {foreignKey: 'estacionId'} );
 
+// Relacion de umo a muchos Estacion - Ruta
+estacion.hasMany(ruta, { foreignKey: 'estacionId' });
+ruta.belongsTo(estacion, { foreignKey: 'estacionId' });
+
+// Relacion de umo a muchos Estacion - Guia de voz
+estacion.hasMany(guiaVoz, { foreignKey: 'estacionId' });
+guiaVoz.belongsTo(estacion, { foreignKey: 'estacionId' });
+
 
 
 
@@ -110,5 +122,11 @@ sequelize.sync({ alter: true }) // alter will update the database schema to matc
 
 // Exportar el objeto sequelize
 module.exports = {
-    
+    usuario,
+    estacion,
+    mensajePersonalizado,
+    puntoInteres,
+    beacon,
+    ruta,
+    guiaVoz
 };
