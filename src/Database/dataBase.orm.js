@@ -54,6 +54,8 @@ const puntoInteresModel = require("../models/puntoInteres.model");
 const beaconModel = require("../models/beacon.model");
 const rutaModel = require("../models/ruta.model");
 const guiaVozModel = require("../models/guiaVoz.model");
+const navegacionExternaModel = require('../models/navegacionExterna.model');
+const navegacionInternaModel = require('../models/navegacionInterna.model');
 
 
 
@@ -70,6 +72,8 @@ const puntoInteres = puntoInteresModel(sequelize, Sequelize)
 const beacon = beaconModel(sequelize, Sequelize)
 const ruta = rutaModel(sequelize, Sequelize)
 const guiaVoz = guiaVozModel(sequelize, Sequelize)
+const navegacionExterna = navegacionExternaModel(sequelize, Sequelize)
+const navegacionInterna = navegacionInternaModel(sequelize, Sequelize)
 
 
 
@@ -102,6 +106,18 @@ ruta.belongsTo(estacion, { foreignKey: 'estacionId' });
 // Relacion de umo a muchos Estacion - Guia de voz
 estacion.hasMany(guiaVoz, { foreignKey: 'estacionId' });
 guiaVoz.belongsTo(estacion, { foreignKey: 'estacionId' });
+
+//Relacion de uno a mucho Usuario - Navegacion Externa
+usuario.hasMany(navegacionExterna, {foreignKey: 'usuarioId' });
+navegacionExterna.belongsTo(usuario, {foreignKey: 'usuarioId'});
+
+//Relacion de uno a mucho Usuario - Navegacion Interna
+usuario.hasMany(navegacionInterna, {foreignKey: 'usuarioId' });
+navegacionInterna.belongsTo(usuario, {foreignKey: 'usuarioId'});
+
+//Relacion de uno a mucho Estacion - Navegacion Interna
+estacion.hasMany(navegacionInterna, {foreignKey: 'estacionId'});
+navegacionInterna.belongsTo(usuario, {foreignKey: 'estacionId'});
 
 
 
