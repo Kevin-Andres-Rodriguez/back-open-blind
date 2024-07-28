@@ -1,6 +1,6 @@
 const puntoInteres = (sequelize, type) => {
     return sequelize.define('puntoInteres', {
-        puntoInteresId : {
+        puntointeresId : {
             type: type.INTEGER,
             autoIncrement: true,
             primaryKey: true,

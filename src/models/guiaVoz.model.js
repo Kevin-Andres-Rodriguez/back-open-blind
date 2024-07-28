@@ -1,5 +1,5 @@
 const guiaVoz = (sequelize, type) => {
-    return sequelize.define('guiaVoz', {
+    return sequelize.define('guiaVoces', {
         guiaVozId : {
             type: type.INTEGER,
             autoIncrement: true,

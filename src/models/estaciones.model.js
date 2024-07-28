@@ -1,5 +1,5 @@
-const estacion = (sequelize, type) => {
-    return sequelize.define('estacion', {
+const estaciones = (sequelize, type) => {
+    return sequelize.define('estaciones', {
         estacionId : {
             type: type.INTEGER,
             autoIncrement: true,
@@ -22,18 +22,10 @@ const estacion = (sequelize, type) => {
             type: type.STRING,
             comment: 'estado de usuario'
         },
-        createEstacion: {
-            type: type.STRING,
-            comment: 'crear estacion'
-        },
-        updateEstacion: {
-            type: type.STRING,
-            comment: 'actualizar estacion'
-        },
     }, {
         timestamps: false,
         comment: 'Tabla de estacion'
     })
 }
 
-module.exports = estacion
+module.exports = estaciones

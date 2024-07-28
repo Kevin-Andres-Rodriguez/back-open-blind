@@ -47,7 +47,7 @@ sequelize.sync({ force: false })
 
 //extracionModelos
 const usuarioModel = require('../models/usuario.model');
-const estacionModel = require('../models/estacion.model')
+const estacionModel = require('../models/estaciones.model')
 const estacion_usuarioModel = require('../models/estacion_usuario.model');
 const mensajePersonalizadoModel = require("../models/mensajePersonalizado.model");
 const puntoInteresModel = require("../models/puntoInteres.model");
@@ -65,7 +65,7 @@ const navegacionInternaModel = require('../models/navegacionInterna.model');
 
 //zincronia tablas
 const usuario = usuarioModel(sequelize, Sequelize)
-const estacion = estacionModel(sequelize, Sequelize)
+const estaciones = estacionModel(sequelize, Sequelize)
 const estacion_usuario = estacion_usuarioModel(sequelize, Sequelize)    
 const mensajePersonalizado = mensajePersonalizadoModel(sequelize, Sequelize) 
 const puntoInteres = puntoInteresModel(sequelize, Sequelize)
@@ -83,8 +83,8 @@ const navegacionInterna = navegacionInternaModel(sequelize, Sequelize)
 //RELACIONES 
 
 // Relacion entre muchos a muchos Estacion - Usuario
-estacion.belongsToMany(usuario, { through: estacion_usuario, foreignKey: 'estacionId'});
-usuario.belongsToMany(estacion, { through: estacion_usuario, foreignKey: 'usuarioId'})
+estaciones.belongsToMany(usuario, { through: estacion_usuario, foreignKey: 'estacionId'});
+usuario.belongsToMany(estaciones, { through: estacion_usuario, foreignKey: 'usuarioId'})
 
 // Relacion de umo a mucho Usuario - Mensaje Personalizado
 usuario.hasMany(mensajePersonalizado, { foreignKey: 'usuarioId' });
@@ -92,20 +92,20 @@ mensajePersonalizado.belongsTo(usuario, { foreignKey: 'usuarioId' });
 
 // Relación entre uno a muchos Estación - Punto de Interes
 
-estacion.hasMany(puntoInteres, {foreignKey: 'estacionId'} );
-puntoInteres.belongsTo(estacion, {foreignKey: 'estacionId'} );
+estaciones.hasMany(puntoInteres, {foreignKey: 'estacionId'} );
+puntoInteres.belongsTo(estaciones, {foreignKey: 'estacionId'} );
 
 // Relación entre uno a muchos Estación - Beacon
-estacion.hasMany(beacon, {foreignKey: 'estacionId'} );
-beacon.belongsTo(estacion, {foreignKey: 'estacionId'} );
+estaciones.hasMany(beacon, {foreignKey: 'estacionId'} );
+beacon.belongsTo(estaciones, {foreignKey: 'estacionId'} );
 
 // Relacion de umo a muchos Estacion - Ruta
-estacion.hasMany(ruta, { foreignKey: 'estacionId' });
-ruta.belongsTo(estacion, { foreignKey: 'estacionId' });
+estaciones.hasMany(ruta, { foreignKey: 'estacionId' });
+ruta.belongsTo(estaciones, { foreignKey: 'estacionId' });
 
 // Relacion de umo a muchos Estacion - Guia de voz
-estacion.hasMany(guiaVoz, { foreignKey: 'estacionId' });
-guiaVoz.belongsTo(estacion, { foreignKey: 'estacionId' });
+estaciones.hasMany(guiaVoz, { foreignKey: 'estacionId' });
+guiaVoz.belongsTo(estaciones, { foreignKey: 'estacionId' });
 
 //Relacion de uno a mucho Usuario - Navegacion Externa
 usuario.hasMany(navegacionExterna, {foreignKey: 'usuarioId' });
@@ -116,7 +116,7 @@ usuario.hasMany(navegacionInterna, {foreignKey: 'usuarioId' });
 navegacionInterna.belongsTo(usuario, {foreignKey: 'usuarioId'});
 
 //Relacion de uno a mucho Estacion - Navegacion Interna
-estacion.hasMany(navegacionInterna, {foreignKey: 'estacionId'});
+estaciones.hasMany(navegacionInterna, {foreignKey: 'estacionId'});
 navegacionInterna.belongsTo(usuario, {foreignKey: 'estacionId'});
 
 
@@ -139,8 +139,9 @@ sequelize.sync({ alter: true }) // alter will update the database schema to matc
 // Exportar el objeto sequelize
 module.exports = {
     sequelize,
+    Sequelize,
     usuario,
-    estacion,
+    estaciones,
     mensajePersonalizado,
     puntoInteres,
     beacon,

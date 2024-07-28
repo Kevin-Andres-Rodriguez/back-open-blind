@@ -1,5 +1,5 @@
 const mensajePersonalizado = (sequelize, type) => {
-    return sequelize.define('mensajePersonalizado', {
+    return sequelize.define('mensajesPersonalizados', {
         mensajeId : {
             type: type.INTEGER,
             autoIncrement: true,
