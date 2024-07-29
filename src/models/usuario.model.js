@@ -35,7 +35,7 @@ const usuario = (sequelize, type) => {
             comment: 'rolde usuario'
         },
         estado_usuario: {
-            type: type.STRING,
+            type: type.BOOLEAN,
             comment: 'estado de usuario'
         },
         createUser: {

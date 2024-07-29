@@ -19,7 +19,7 @@ const puntoInteres = (sequelize, type) => {
             comment: 'ubicacion del punto de interes dentro del mentro'
         },
         estadoPunto: {
-            type: type.STRING,
+            type: type.BOOLEAN,
             comment: 'estado del punto de interes'
         },
         createPunto: {

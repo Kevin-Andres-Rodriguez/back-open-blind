@@ -16,7 +16,7 @@ const beacon = (sequelize, type) => {
             comment: 'ubicacion del Beacon'
         },
         estadoBeacon: {
-            type: type.STRING,
+            type: type.BOOLEAN,
             comment: 'estado del punto de interes'
         },
         createBeacon: {
