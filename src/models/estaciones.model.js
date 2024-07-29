@@ -22,6 +22,14 @@ const estaciones = (sequelize, type) => {
             type: type.BOOLEAN,
             comment: 'estado de usuario'
         },
+        createEstacion: {
+            type: type.DATE,
+            comment: "Fecha y hora de creación de la estacion",
+          },
+          updateEstacion: {
+            type: type.DATE,
+            comment: "Fecha y hora de última actualización de la estacion",
+          },
     }, {
         timestamps: false,
         comment: 'Tabla de estacion'

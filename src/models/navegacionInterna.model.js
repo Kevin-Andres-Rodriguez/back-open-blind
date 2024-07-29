@@ -11,11 +11,11 @@ const navegacionInterna = (sequelize, type) => {
             comment: 'Fecha y hora de la ruta en el metro'
         },
         createNavegacionInterna: {
-            type: type.STRING,
+            type: type.DATE,
             comment: 'crear navegacion interna'
         },
         updateNavegacionInterna: {
-            type: type.STRING,
+            type: type.DATE,
             comment: 'actuazlizar navegacion interna'
         },
         }, {

@@ -20,11 +20,11 @@ const beacon = (sequelize, type) => {
             comment: 'estado del punto de interes'
         },
         createBeacon: {
-            type: type.STRING,
+            type: type.DATE,
             comment: 'crear punto interes'
         },
         updateBeacon: {
-            type: type.STRING,
+            type: type.DATE,
             comment: 'actualizar punto de interes'
         },
     }, {

@@ -12,12 +12,13 @@ guiaVozCtl.mostrar = async (req, res) => {
 };
 
 guiaVozCtl.mandar = async (req, res) => {
-  const { descripcionGuiaVoz, audioUrlGuiaVoz, idiomaGuiaVoz, estadoGuiaVoz} = req.body;
+  const { descripcionGuiaVoz, audioUrlGuiaVoz, idiomaGuiaVoz, estadoGuiaVoz } = req.body;
+  const createGuiaVoz = new Date(); // Fecha y hora actuales
 
   try {
     await sql.query(
-      "INSERT INTO guiaVoces (descripcionGuiaVoz, audioUrlGuiaVoz, idiomaGuiaVoz, estadoGuiaVoz) VALUES (?, ?, ?, ?)",
-      [descripcionGuiaVoz, audioUrlGuiaVoz, idiomaGuiaVoz, estadoGuiaVoz]
+      "INSERT INTO guiaVoces (descripcionGuiaVoz, audioUrlGuiaVoz, idiomaGuiaVoz, estadoGuiaVoz, createGuiaVoz) VALUES (?, ?, ?, ?, ?)",
+      [descripcionGuiaVoz, audioUrlGuiaVoz, idiomaGuiaVoz, estadoGuiaVoz, createGuiaVoz]
     );
     res.status(200).send("Guía de voz creada con éxito");
   } catch (error) {
@@ -68,15 +69,15 @@ guiaVozCtl.eliminar = async (req, res) => {
   }
 };
 
-// Nueva función para actualizar una guía de voz por ID
 guiaVozCtl.actualizar = async (req, res) => {
   const { id } = req.params;
-  const { descripcionGuiaVoz, audioUrlGuiaVoz, idiomaGuiaVoz, estadoGuiaVoz} = req.body;
+  const { descripcionGuiaVoz, audioUrlGuiaVoz, idiomaGuiaVoz, estadoGuiaVoz } = req.body;
+  const updateGuiaVoz = new Date(); // Fecha y hora actuales
 
   try {
     const result = await sql.query(
-      "UPDATE guiaVoces SET descripcionGuiaVoz = ?, audioUrlGuiaVoz = ?, idiomaGuiaVoz = ?, estadoGuiaVoz = ? WHERE guiaVozId = ?",
-      [descripcionGuiaVoz, audioUrlGuiaVoz, idiomaGuiaVoz, estadoGuiaVoz, id]
+      "UPDATE guiaVoces SET descripcionGuiaVoz = ?, audioUrlGuiaVoz = ?, idiomaGuiaVoz = ?, estadoGuiaVoz = ?, updateGuiaVoz = ? WHERE guiaVozId = ?",
+      [descripcionGuiaVoz, audioUrlGuiaVoz, idiomaGuiaVoz, estadoGuiaVoz, updateGuiaVoz, id]
     );
 
     if (result.affectedRows > 0) {

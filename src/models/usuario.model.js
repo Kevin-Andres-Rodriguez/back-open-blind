@@ -39,11 +39,11 @@ const usuario = (sequelize, type) => {
             comment: 'estado de usuario'
         },
         createUser: {
-            type: type.STRING,
+            type: type.DATE,
             comment: 'crear de usuario'
         },
         updateUser: {
-            type: type.STRING,
+            type: type.DATE,
             comment: 'actualizar de usuario'
         },
     }, {

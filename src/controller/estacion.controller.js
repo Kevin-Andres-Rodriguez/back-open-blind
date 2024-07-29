@@ -13,11 +13,12 @@ estacionCtl.mostrar = async (req, res) => {
 
 estacionCtl.mandar = async (req, res) => {
   const { nombreEstacion, descripcionEstacion, ubicacionEstacion, estadoEstacion } = req.body;
+  const createEstacion = new Date(); // Fecha y hora actuales
 
   try {
     await sql.query(
-      "INSERT INTO estaciones (nombreEstacion, descripcionEstacion, ubicacionEstacion, estadoEstacion) VALUES (?, ?, ?, ?)",
-      [nombreEstacion, descripcionEstacion, ubicacionEstacion, estadoEstacion]
+      "INSERT INTO estaciones (nombreEstacion, descripcionEstacion, ubicacionEstacion, estadoEstacion, createEstacion) VALUES (?, ?, ?, ?, ?)",
+      [nombreEstacion, descripcionEstacion, ubicacionEstacion, estadoEstacion, createEstacion]
     );
     res.status(200).send("Estación creada con éxito");
   } catch (error) {
@@ -72,11 +73,12 @@ estacionCtl.eliminar = async (req, res) => {
 estacionCtl.actualizar = async (req, res) => {
   const { id } = req.params;
   const { nombreEstacion, descripcionEstacion, ubicacionEstacion, estadoEstacion } = req.body;
+  const updateEstacion = new Date(); // Fecha y hora actuales
 
   try {
     const result = await sql.query(
-      "UPDATE estaciones SET nombreEstacion = ?, descripcionEstacion = ?, ubicacionEstacion = ?, estadoEstacion = ? WHERE estacionId = ?",
-      [nombreEstacion, descripcionEstacion, ubicacionEstacion, estadoEstacion, id]
+      "UPDATE estaciones SET nombreEstacion = ?, descripcionEstacion = ?, ubicacionEstacion = ?, estadoEstacion = ?, updateEstacion = ? WHERE estacionId = ?",
+      [nombreEstacion, descripcionEstacion, ubicacionEstacion, estadoEstacion, updateEstacion, id]
     );
 
     if (result.affectedRows > 0) {

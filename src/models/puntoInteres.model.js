@@ -23,16 +23,16 @@ const puntoInteres = (sequelize, type) => {
             comment: 'estado del punto de interes'
         },
         createPunto: {
-            type: type.STRING,
+            type: type.DATE,
             comment: 'crear punto interes'
         },
         updatePunto: {
-            type: type.STRING,
+            type: type.DATE,
             comment: 'actualizar punto de interes'
         },
     }, {
         timestamps: false,
-        comment: 'Tabla de usuarios'
+        comment: 'Tabla de punto de interes'
     })
 }
 

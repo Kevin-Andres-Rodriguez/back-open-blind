@@ -19,11 +19,11 @@ const mensajePersonalizado = (sequelize, type) => {
             comment: 'estado de usuario'
         },
         createMensaje: {
-            type: type.STRING,
+            type: type.DATE,
             comment: 'crear estacion'
         },
         updateMensaje: {
-            type: type.STRING,
+            type: type.DATE,
             comment: 'actualizar estacion'
         },
     }, {

@@ -19,11 +19,11 @@ const navegacionExterna = (sequelize, type) => {
             comment: 'Fecha y hora de la ruta'
         },
         createNavegacionExterna: {
-            type: type.STRING,
+            type: type.DATE,
             comment: 'crear navegacion externa'
         },
         updateNavegacionExterna: {
-            type: type.STRING,
+            type: type.DATE,
             comment: 'actuazlizar navegacion externa'
         },
         }, {
