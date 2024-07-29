@@ -14,12 +14,13 @@ rutaCtl.mostrar = async (req, res) => {
 
 
 rutaCtl.mandar = async (req, res) => {
-  const { nombreRuta, descripcionRuta, ubicacionRuta, estadoRuta} = req.body;
+  const { nombreRuta, descripcionRuta, ubicacionRuta, estadoRuta } = req.body;
+  const createRuta = new Date(); // Fecha y hora actuales
 
   try {
     await sql.query(
-      "INSERT INTO ruta (nombreRuta, descripcionRuta, ubicacionRuta, estadoRuta) VALUES (?, ?, ?, ?)",
-      [nombreRuta, descripcionRuta, ubicacionRuta, estadoRuta]
+      "INSERT INTO ruta (nombreRuta, descripcionRuta, ubicacionRuta, estadoRuta, createRuta) VALUES (?, ?, ?, ?, ?)",
+      [nombreRuta, descripcionRuta, ubicacionRuta, estadoRuta, createRuta]
     );
     res.status(200).send("Ruta creada con éxito");
   } catch (error) {
@@ -73,12 +74,13 @@ rutaCtl.eliminar = async (req, res) => {
 // Nueva función para actualizar una ruta por ID
 rutaCtl.actualizar = async (req, res) => {
   const { id } = req.params;
-  const { nombreRuta, descripcionRuta, ubicacionRuta, estadoRuta} = req.body;
+  const { nombreRuta, descripcionRuta, ubicacionRuta, estadoRuta } = req.body;
+  const updateRuta = new Date(); // Fecha y hora actuales
 
   try {
     const result = await sql.query(
-      "UPDATE ruta SET nombreRuta = ?, descripcionRuta = ?, ubicacionRuta = ?, estadoRuta = ? WHERE rutaId = ?",
-      [nombreRuta, descripcionRuta, ubicacionRuta, estadoRuta, id]
+      "UPDATE ruta SET nombreRuta = ?, descripcionRuta = ?, ubicacionRuta = ?, estadoRuta = ?, updateRuta = ? WHERE rutaId = ?",
+      [nombreRuta, descripcionRuta, ubicacionRuta, estadoRuta, updateRuta, id]
     );
 
     if (result.affectedRows > 0) {

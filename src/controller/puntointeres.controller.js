@@ -12,13 +12,13 @@ puntointeresCtl.mostrar = async (req, res) => {
 };
 
 puntointeresCtl.mandar = async (req, res) => {
-  const { nombrePunto, descripcionPunto, ubicacionPunto, estadoPunto } =
-    req.body;
+  const { nombrePunto, descripcionPunto, ubicacionPunto, estadoPunto } = req.body;
+  const createPunto = new Date(); // Fecha y hora actuales
 
   try {
     await sql.query(
-      "INSERT INTO puntoInteres (nombrePunto, descripcionPunto, ubicacionPunto, estadoPunto) VALUES (?, ?, ?, ?)",
-      [nombrePunto, descripcionPunto, ubicacionPunto, estadoPunto]
+      "INSERT INTO puntoInteres (nombrePunto, descripcionPunto, ubicacionPunto, estadoPunto, createPunto) VALUES (?, ?, ?, ?, ?)",
+      [nombrePunto, descripcionPunto, ubicacionPunto, estadoPunto, createPunto]
     );
     res.status(200).send("Punto de interés creado con éxito");
   } catch (error) {
@@ -71,16 +71,17 @@ puntointeresCtl.eliminar = async (req, res) => {
 
 
   // Nueva función para actualizar un punto de interés por ID
-puntointeresCtl.actualizar = async (req, res) => {
+  puntointeresCtl.actualizar = async (req, res) => {
     const { id } = req.params;
     const { nombrePunto, descripcionPunto, ubicacionPunto, estadoPunto } = req.body;
+    const updatePunto = new Date(); // Fecha y hora actuales
   
     try {
       const result = await sql.query(
-        "UPDATE puntointeres SET nombrePunto = ?, descripcionPunto = ?, ubicacionPunto = ?, estadoPunto = ? WHERE puntointeresId = ?",
-        [nombrePunto, descripcionPunto, ubicacionPunto, estadoPunto, id]
+        "UPDATE puntoInteres SET nombrePunto = ?, descripcionPunto = ?, ubicacionPunto = ?, estadoPunto = ?, updatePunto = ? WHERE puntointeresId = ?",
+        [nombrePunto, descripcionPunto, ubicacionPunto, estadoPunto, updatePunto, id]
       );
-      
+  
       if (result.affectedRows > 0) {
         res.status(200).send("Punto de interés actualizado con éxito");
       } else {

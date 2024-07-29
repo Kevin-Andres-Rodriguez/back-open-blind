@@ -12,12 +12,13 @@ mensajePersonalizadoCtl.mostrar = async (req, res) => {
 };
 
 mensajePersonalizadoCtl.mandar = async (req, res) => {
-  const { mensaje, contactoMensaje, estadoMensaje} = req.body;
+  const { mensaje, contactoMensaje, estadoMensaje } = req.body;
+  const createMensaje = new Date(); // Fecha y hora actuales
 
   try {
     await sql.query(
-      "INSERT INTO mensajesPersonalizados (mensaje, contactoMensaje, estadoMensaje) VALUES (?, ?, ?)",
-      [mensaje, contactoMensaje, estadoMensaje]
+      "INSERT INTO mensajesPersonalizados (mensaje, contactoMensaje, estadoMensaje, createMensaje) VALUES (?, ?, ?, ?)",
+      [mensaje, contactoMensaje, estadoMensaje, createMensaje]
     );
     res.status(200).send("Mensaje personalizado creado con éxito");
   } catch (error) {
@@ -71,12 +72,13 @@ mensajePersonalizadoCtl.eliminar = async (req, res) => {
 // Nueva función para actualizar un mensaje personalizado por ID
 mensajePersonalizadoCtl.actualizar = async (req, res) => {
   const { id } = req.params;
-  const { mensaje, contactoMensaje, estadoMensaje, createMensaje, updateMensaje } = req.body;
+  const { mensaje, contactoMensaje, estadoMensaje } = req.body;
+  const updateMensaje = new Date(); // Fecha y hora actuales
 
   try {
     const result = await sql.query(
-      "UPDATE mensajesPersonalizados SET mensaje = ?, contactoMensaje = ?, estadoMensaje = ? WHERE mensajeId = ?",
-      [mensaje, contactoMensaje, estadoMensaje, id]
+      "UPDATE mensajesPersonalizados SET mensaje = ?, contactoMensaje = ?, estadoMensaje = ?, updateMensaje = ? WHERE mensajeId = ?",
+      [mensaje, contactoMensaje, estadoMensaje, updateMensaje, id]
     );
 
     if (result.affectedRows > 0) {

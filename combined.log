@@ -1044,3 +1044,9 @@
 {"level":"info","message":"::1 - - [29/Jul/2024:19:45:59 +0000] \"GET /estacion HTTP/1.1\" 304 - \"http://localhost:8080/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36\""}
 {"level":"info","message":"::1 - - [29/Jul/2024:19:46:04 +0000] \"GET /estacion HTTP/1.1\" 304 - \"http://localhost:8080/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36\""}
 {"level":"info","message":"::1 - - [29/Jul/2024:19:47:01 +0000] \"PUT /estacion/23 HTTP/1.1\" 200 32 \"http://localhost:8080/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36\""}
+{"level":"info","message":"::1 - - [29/Jul/2024:20:00:32 +0000] \"POST /ruta/ HTTP/1.1\" 200 22 \"-\" \"PostmanRuntime/7.40.0\""}
+{"level":"info","message":"::1 - - [29/Jul/2024:20:00:46 +0000] \"PUT /ruta/7 HTTP/1.1\" 200 27 \"-\" \"PostmanRuntime/7.40.0\""}
+{"level":"info","message":"::1 - - [29/Jul/2024:20:01:15 +0000] \"POST /puntoInteres/ HTTP/1.1\" 200 35 \"-\" \"PostmanRuntime/7.40.0\""}
+{"level":"info","message":"::1 - - [29/Jul/2024:20:01:32 +0000] \"PUT /puntoInteres/11 HTTP/1.1\" 200 40 \"-\" \"PostmanRuntime/7.40.0\""}
+{"level":"info","message":"::1 - - [29/Jul/2024:20:01:54 +0000] \"POST /mensajepersonalizado/ HTTP/1.1\" 200 39 \"-\" \"PostmanRuntime/7.40.0\""}
+{"level":"info","message":"::1 - - [29/Jul/2024:20:02:08 +0000] \"PUT /mensajepersonalizado/3 HTTP/1.1\" 200 44 \"-\" \"PostmanRuntime/7.40.0\""}
