@@ -22,7 +22,7 @@ const usuario = (sequelize, type) => {
             type: type.STRING,
             comment: 'Correo electronico'
         },
-        contraseñaUsuario: {
+        contrasenaUsuario: {
             type: type.STRING,
             comment: 'contraseña de usuario'
         },
