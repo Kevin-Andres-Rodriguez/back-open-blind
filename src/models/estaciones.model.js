@@ -19,7 +19,7 @@ const estaciones = (sequelize, type) => {
             comment: 'ubicacion donde se encuentra la estacion'
         },
         estadoEstacion: {
-            type: type.BOOLEAN,
+            type: type.STRING,
             comment: 'estado de usuario'
         },
         createEstacion: {

@@ -15,7 +15,7 @@ const mensajePersonalizado = (sequelize, type) => {
             comment: 'Descripcion de la estacion'
         },
         estadoMensaje: {
-            type: type.BOOLEAN,
+            type: type.STRING,
             comment: 'estado de usuario'
         },
         createMensaje: {

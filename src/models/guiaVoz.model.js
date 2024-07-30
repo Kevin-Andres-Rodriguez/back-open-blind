@@ -21,7 +21,7 @@ const guiaVoz = (sequelize, type) => {
         comment: "idioma donde se encuentra la guia de Voz",
       },
       estadoGuiaVoz: {
-        type: type.BOOLEAN,
+        type: type.STRING,
         comment: "estado de guia de Voz",
       },
       createGuiaVoz: {

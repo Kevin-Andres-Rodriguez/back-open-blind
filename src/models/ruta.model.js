@@ -21,7 +21,7 @@ const ruta = (sequelize, type) => {
         comment: "ubicacion donde se encuentra la ruta",
       },
       estadoRuta: {
-        type: type.BOOLEAN,
+        type: type.STRING,
         comment: "estado de ruta",
       },
       createRuta: {
