@@ -146,6 +146,7 @@ const puntoInteresRouter = require('./router/puntointeres.router')
 const rutaRouter = require('./router/ruta.router')
 const mensajepersonalizadoRouter = require('./router/mensajepersonalizado.router')
 const guiavozRouter = require('./router/guiavoz.router')
+const usuarioRouter = require('./router/usuario.router')
 
 
 app.use('/estacion', estacionRouter); 
@@ -153,6 +154,7 @@ app.use('/puntoInteres', puntoInteresRouter);
 app.use('/ruta', rutaRouter);
 app.use('/mensajepersonalizado', mensajepersonalizadoRouter);
 app.use('/guiavoz', guiavozRouter);
+app.use('/usuario', usuarioRouter);
 
 
 // Exportar la aplicación
