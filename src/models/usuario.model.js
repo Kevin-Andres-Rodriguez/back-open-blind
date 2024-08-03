@@ -1,5 +1,5 @@
 const usuario = (sequelize, type) => {
-    return sequelize.define('usuario', {
+    return sequelize.define('usuarios', {
         usuarioId: {
             type: type.INTEGER,
             autoIncrement: true,
