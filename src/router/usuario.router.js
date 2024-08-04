@@ -5,9 +5,9 @@ const authMiddleware = require('../middleware/auth.middleware');
 
 router.post('/crear', crear);
 router.post('/login', login);
-router.get('/', authMiddleware, mostrarTodos); // Ruta protegida
-router.get('/:id', authMiddleware, obtenerPorId); // Ruta protegida
-router.put('/:id', authMiddleware, actualizar); // Ruta protegida
-router.delete('/:id', authMiddleware, eliminar); // Ruta protegida
+router.get('/',  mostrarTodos); 
+router.get('/:id', obtenerPorId); 
+router.put('/:id', actualizar); 
+router.delete('/:id', eliminar); 
 
 module.exports = router;
