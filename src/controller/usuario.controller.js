@@ -2,16 +2,27 @@ const usuarioCtl = {};
 const sql = require("../Database/dataBase.sql"); 
 const jwt = require('jsonwebtoken');
 const secret = process.env.JWT_SECRET || 'tu_clave_secreta'; 
+const bcrypt = require('bcrypt');
 
 // Crear nuevo usuario
 usuarioCtl.crear = async (req, res) => {
     const { nombreUsuario, apellidoUsuario, telefonoUsuario, correoUsuario, contrasenaUsuario, fechaNacimientoUsuario, rolUser, estado_usuario } = req.body;
     const createUser = new Date(); // Fecha y hora actuales
 
+    // Validación de la contraseña
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (!passwordRegex.test(contrasenaUsuario)) {
+        return res.status(400).send("La contraseña debe tener al menos 8 caracteres e incluir mayúsculas, minúsculas, números y caracteres especiales.");
+    }
+
     try {
+        // Genera una sal y hashea la contraseña
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(contrasenaUsuario, salt);
+
         await sql.query(
             "INSERT INTO usuarios (nombreUsuario, apellidoUsuario, telefonoUsuario, correoUsuario, contrasenaUsuario, fechaNacimientoUsuario, rolUser, estado_usuario, createUser) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-            [nombreUsuario, apellidoUsuario, telefonoUsuario, correoUsuario, contrasenaUsuario, fechaNacimientoUsuario, rolUser, estado_usuario, createUser]
+            [nombreUsuario, apellidoUsuario, telefonoUsuario, correoUsuario, hashedPassword, fechaNacimientoUsuario, rolUser, estado_usuario, createUser]
         );
         res.status(200).send("Usuario creado con éxito");
     } catch (error) {
@@ -26,10 +37,10 @@ usuarioCtl.login = async (req, res) => {
     const { correoUsuario, contrasenaUsuario } = req.body;
 
     try {
-        // Asegúrate de que la consulta devuelva todos los campos necesarios
+        // Busca al usuario en la base de datos por correo electrónico
         const result = await sql.query(
-            "SELECT * FROM usuarios WHERE correoUsuario = ? AND contrasenaUsuario = ?",
-            [correoUsuario, contrasenaUsuario]
+            "SELECT * FROM usuarios WHERE correoUsuario = ?",
+            [correoUsuario]
         );
 
         if (result.length === 0) {
@@ -37,6 +48,15 @@ usuarioCtl.login = async (req, res) => {
         }
 
         const usuario = result[0];
+
+        // Compara la contraseña proporcionada con la contraseña inscrita almacenada en la base de datos
+        const isMatch = await bcrypt.compare(contrasenaUsuario, usuario.contrasenaUsuario);
+
+        if (!isMatch) {
+            return res.status(401).send("Credenciales incorrectas");
+        }
+
+        // Si la contraseña es correcta, genera el token JWT
         const token = jwt.sign({ id: usuario.usuarioId, nombre: usuario.nombreUsuario }, secret, { expiresIn: '1h' });
 
         res.status(200).json({
@@ -55,8 +75,6 @@ usuarioCtl.login = async (req, res) => {
         console.error("Error en la autenticación:", error);
         res.status(500).send("Hubo un error al autenticar el usuario");
     }
-
-    
 };
 
 // Obtener usuario por ID
@@ -143,4 +161,3 @@ usuarioCtl.mostrarTodos = async (req, res) => {
 
 
 module.exports = usuarioCtl;
-
