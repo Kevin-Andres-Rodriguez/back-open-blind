@@ -16,18 +16,43 @@ usuarioCtl.crear = async (req, res) => {
     }
 
     try {
+
         // Genera una sal y hashea la contraseña
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(contrasenaUsuario, salt);
 
+        // Inserta el nuevo usuario
         await sql.query(
             "INSERT INTO usuarios (nombreUsuario, apellidoUsuario, telefonoUsuario, correoUsuario, contrasenaUsuario, fechaNacimientoUsuario, rolUser, estado_usuario, createUser) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
             [nombreUsuario, apellidoUsuario, telefonoUsuario, correoUsuario, hashedPassword, fechaNacimientoUsuario, rolUser, estado_usuario, createUser]
         );
+
         res.status(200).send("Usuario creado con éxito");
     } catch (error) {
         console.error("Error al crear el usuario:", error);
         res.status(500).send("Hubo un error al crear el usuario");
+    }
+};
+
+
+usuarioCtl.verificarCorreo = async (req, res) => {
+    const { correoUsuario } = req.query;
+
+    try {
+        // Verifica si el correo ya existe en la base de datos
+        const query = "SELECT * FROM usuarios WHERE correoUsuario = ?";
+        const rows = await sql.query(query, [correoUsuario]);
+        console.log('Resultado de la consulta:', rows);
+        
+
+        if (rows && rows.length > 0) {
+            return res.status(200).send("Correo ya registrado");
+        } else {
+            return res.status(404).send("Correo disponible");
+        }
+    } catch (error) {
+        console.error("Error al verificar el correo:", error);
+        res.status(500).send("Hubo un error al verificar el correo");
     }
 };
 
